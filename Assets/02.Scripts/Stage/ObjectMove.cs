@@ -24,6 +24,7 @@ public class ObjectMove : MonoBehaviour
     }
     IEnumerator Connected()
     {
+        // 게임매니저 기다리기
         while(GameManager.Instance == null)
         {
             yield return null;
@@ -33,7 +34,7 @@ public class ObjectMove : MonoBehaviour
     void moveObject()
     {
         if (GameManager.Instance.isGameOver) return;
-
+        // 오른쪽으로 이동
         transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
         StartCoroutine(CMoveObject());
         

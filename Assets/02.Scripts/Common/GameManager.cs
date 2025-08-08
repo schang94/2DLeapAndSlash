@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public static Action<float> OnScoreAction;
     public static Action OnDieAction;
     public static Action OnRestart;
+    private Coroutine enemyRespawn;
+    private Coroutine trapRespawn;
     private GameObject player;
     void Awake()
     {
@@ -22,31 +24,29 @@ public class GameManager : MonoBehaviour
         else if (Instance != this)
             Destroy(gameObject);
 
-        StartCoroutine(EnemyRespawn());
-        StartCoroutine(TrapRespawn());
+        RroutineStart();
 
         SelectCharacter();
     }
 
     IEnumerator EnemyRespawn()
     {
-        float time = UnityEngine.Random.Range(3f, 5f);
-        while (!isGameOver)
+        while (true)
         {
+            float time = UnityEngine.Random.Range(3f, 5f);
             yield return new WaitForSeconds(time);
             var createEnemy = PoolingManger.p_Instance.GetEnemy();
    
             createEnemy.transform.position = new Vector2(12f, -2.58f);
             createEnemy.SetActive(true);
-            
         }
     }
 
     IEnumerator TrapRespawn()
     {
-        float time = UnityEngine.Random.Range(1f, 5f);
-        while (!isGameOver)
+        while (true)
         {
+            float time = UnityEngine.Random.Range(1f, 5f);
             yield return new WaitForSeconds(time);
             var createTrap = PoolingManger.p_Instance.GetTrap();
 
@@ -71,7 +71,9 @@ public class GameManager : MonoBehaviour
     public void Die()
     {
         isGameOver = true;
+        RroutineStop();
         OnDieAction?.Invoke();
+        print("´ÙÀÌ");
     }
 
     public void ReStart()
@@ -83,10 +85,29 @@ public class GameManager : MonoBehaviour
         OnRestart?.Invoke();
         PoolingManger.p_Instance.SetEnemy();
         PoolingManger.p_Instance.SetTrap();
-        StartCoroutine(EnemyRespawn());
-        StartCoroutine(TrapRespawn());
+        RroutineStart();
 
         player.transform.position = new Vector3(-6.03f, -2.76f, 0);
         player.SetActive(true);
+    }
+
+    public void RroutineStart()
+    {
+        if (enemyRespawn == null) enemyRespawn = StartCoroutine(EnemyRespawn());
+        if (trapRespawn == null)  trapRespawn = StartCoroutine(TrapRespawn());
+    }
+
+    public void RroutineStop()
+    {
+        if (enemyRespawn != null)
+        {
+            StopCoroutine(enemyRespawn);
+            enemyRespawn = null;
+        }
+        if (trapRespawn != null)
+        {
+            StopCoroutine(trapRespawn);
+            trapRespawn = null;
+        }
     }
 }

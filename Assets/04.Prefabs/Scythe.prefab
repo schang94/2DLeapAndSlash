@@ -192,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   weapone: {fileID: 0}
+  effect: {fileID: 0}
   playerData: {fileID: 11400000, guid: 1d1e25182276a444f9398b9378af0361, type: 2}
   isJump: 0
 --- !u!114 &1679915030496864290
@@ -403,7 +404,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4432957975332481743}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GunData
   m_EditorClassIdentifier: 
   maxHp: 100
-  damage: 25
+  damage: 20
   attackSpeed: 1

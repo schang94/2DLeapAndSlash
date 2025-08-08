@@ -14,7 +14,7 @@ public class PlayerCtrl : MonoBehaviour
     [SerializeField] private Transform effect;
     private Transform shadow;
     public PlayerData playerData;
-    private float jumpPower = 100f;
+    private float jumpPower = 120f;
     private float moveSpeed = 5f;
     private float maxSpeed = 5f;
     public int isJump = 0;

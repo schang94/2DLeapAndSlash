@@ -176,7 +176,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3889200901930959114}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -512,6 +512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: {fileID: 0}
   weapone: {fileID: 0}
+  effect: {fileID: 0}
   playerData: {fileID: 11400000, guid: 9f8a3288bb2ac4d4293a7a3f8599ee3f, type: 2}
   isJump: 0
 --- !u!114 &2410706743438145160

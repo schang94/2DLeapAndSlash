@@ -10,7 +10,7 @@ public class BGRelocation : MonoBehaviour
     void Start()
     {
         boxCol = GetComponent<BoxCollider2D>();
-        w = boxCol.size.x * transform.localScale.x;
+        w = boxCol.size.x * transform.localScale.x; // Collider를 이용하여 크기 받아오기
         ws = new WaitForSeconds(0.0003f);
         Relocation();
     }

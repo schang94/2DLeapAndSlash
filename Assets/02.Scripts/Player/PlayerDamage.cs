@@ -14,7 +14,7 @@ public class PlayerDamage : LivingEntity
     SpriteRenderer spriteRenderer;
     private bool isHit = false;
     public Slider slider;
-    public float damage;
+    private float damage;
     void Awake()
     {
         animator = GetComponent<Animator>();
