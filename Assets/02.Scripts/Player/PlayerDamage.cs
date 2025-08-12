@@ -23,23 +23,6 @@ public class PlayerDamage : LivingEntity
        
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        // 데미지를 받았을 때
-        if (GameManager.Instance.isHit) return; // 데미지를 받는 중일 때 리턴
-        var target = col.transform.GetComponent<EnemyDamage>();
-        if (target != null && !target.isDie)
-        {
-            Vector2 offset = (col.transform.position - transform.position).normalized;
-            // 데미지를 받았을 때 밀리는 방향 설정
-            if (Mathf.Abs(offset.x)>Mathf.Abs(offset.y))
-                rb.AddForce(Vector2.left * 20f * Mathf.RoundToInt(offset.x), ForceMode2D.Impulse);
-            else
-                rb.AddForce(Vector2.left * 15f + Vector2.up * 10f, ForceMode2D.Impulse);
-            DamageEffect();
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D col)
     {
         // 공격 했을 때 타켓이 LivingEntity를 가지고 있다면
@@ -50,6 +33,23 @@ public class PlayerDamage : LivingEntity
         }
     }
 
+    public void KnockBack(EnemyDamage target, float damage)
+    {
+        if (GameManager.Instance.isHit) return;
+        //var target = col.transform.GetComponent<EnemyDamage>();
+        if (target != null && !target.isDie)
+        {
+            Vector2 offset = (target.transform.position - transform.position).normalized;
+            // 데미지를 받았을 때 밀리는 방향 설정
+            if (Mathf.Abs(offset.x) > Mathf.Abs(offset.y))
+                rb.AddForce(Vector2.left * 20f * Mathf.RoundToInt(offset.x), ForceMode2D.Impulse);
+            else
+                rb.AddForce(Vector2.left * 15f + Vector2.up * 10f, ForceMode2D.Impulse);
+
+            OnDamage(damage);
+            DamageEffect();
+        }
+    }
     public void DamageEffect()
     {
         StartCoroutine(OnDamageEffect());

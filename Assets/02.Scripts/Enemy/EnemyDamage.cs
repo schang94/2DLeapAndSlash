@@ -19,8 +19,8 @@ public class EnemyDamage : LivingEntity
     {
         startHp = 100;
         base.OnEnable();
-        isDie = false;
-        
+        DieSetting(false);
+
     }
 
     public override void OnDamage(float damage) // 데미지를 받았을 때
@@ -33,27 +33,32 @@ public class EnemyDamage : LivingEntity
     public override void Die()
     {
         base.Die();
-        isDie = true;
         StartCoroutine(OnDie());
-        
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnCollisionStay2D(Collision2D col)
     {
         // Enemy와 플레이어서 닿았을 때
-        LivingEntity target = col.transform.GetComponent<PlayerDamage>();
+        PlayerDamage target = col.transform.GetComponent<PlayerDamage>();
         if (target != null && !isDie)
         {
-            target.OnDamage(10f);
+            target.KnockBack(GetComponent<EnemyDamage>(), 10f);
+            //target.OnDamage(10f);
         }
     }
-
     IEnumerator OnDie()
     {
+        DieSetting(true);
         animator.SetTrigger(hashDie);
         float time = animator.GetCurrentAnimatorStateInfo(0).length;
         yield return new WaitForSeconds(time);
         transform.gameObject.SetActive(false);
+    }
 
+    private void DieSetting(bool isEnable)
+    {
+        isDie = isEnable;
+        GetComponent<Rigidbody2D>().simulated = !isEnable;
+        GetComponent<CapsuleCollider2D>().isTrigger = isEnable;
     }
 }
