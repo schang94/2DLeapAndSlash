@@ -23,10 +23,10 @@ public class EnemyDamage : LivingEntity
         
     }
 
-    public override void OnDamage(float damage)
+    public override void OnDamage(float damage) // 데미지를 받았을 때
     {
         base.OnDamage(damage);
-        GetComponent<Rigidbody2D>().AddForce(Vector2.right * 10f, ForceMode2D.Impulse);
+        GetComponent<Rigidbody2D>().AddForce(Vector2.right * 10f, ForceMode2D.Impulse); // 뒤로 밀리게하기
         animator.SetTrigger(hashHit);
     }
 
@@ -40,7 +40,8 @@ public class EnemyDamage : LivingEntity
 
     private void OnCollisionEnter2D(Collision2D col)
     {
-        LivingEntity target = col.transform.GetComponent<LivingEntity>();
+        // Enemy와 플레이어서 닿았을 때
+        LivingEntity target = col.transform.GetComponent<PlayerDamage>();
         if (target != null && !isDie)
         {
             target.OnDamage(10f);

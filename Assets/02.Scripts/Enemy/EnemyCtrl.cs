@@ -27,7 +27,7 @@ public class EnemyCtrl : MonoBehaviour
         }
         Move();
 
-        if (transform.position.x < -12)
+        if (transform.position.x < -12) // 화면에서 사라지면 비활성화
             transform.gameObject.SetActive(false);
     }
 
@@ -35,13 +35,9 @@ public class EnemyCtrl : MonoBehaviour
     {
         rb.AddForce(Vector2.left * moveSpeed, ForceMode2D.Impulse);
 
-        if (rb.velocity.x > moveSpeed)
-        {
+        if (rb.velocity.x > moveSpeed) // 최대 속도 제한
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
-        }
         else if (rb.velocity.x < (-1 * moveSpeed))
-        {
             rb.velocity = new Vector2((-1 * moveSpeed), rb.velocity.y);
-        }
     }
 }

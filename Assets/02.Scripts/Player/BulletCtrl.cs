@@ -16,19 +16,20 @@ public class BulletCtrl : MonoBehaviour
         StartCoroutine(Connected());
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         MoveLimited();
     }
 
     IEnumerator Connected()
     {
-        while (GameManager.Instance == null)
+        // GameManager 기다리기
+        while (GameManager.Instance == null) 
         {
             yield return null;
         }
 
-        rb.AddForce(Vector2.right * 100f, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.right * 80f, ForceMode2D.Impulse);
         yield return new WaitForSeconds(0.5f);
         
     }

@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         RroutineStart();
-
         SelectCharacter();
     }
 
@@ -33,9 +32,10 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            float time = UnityEngine.Random.Range(3f, 5f);
+            float time = UnityEngine.Random.Range(2f, 4f);
+            float mobNumber = UnityEngine.Random.Range(0, 10);
             yield return new WaitForSeconds(time);
-            var createEnemy = PoolingManger.p_Instance.GetEnemy();
+            var createEnemy = mobNumber % 2 == 0 ? PoolingManger.p_Instance.GetEnemy() : PoolingManger.p_Instance.GetFrog();
    
             createEnemy.transform.position = new Vector2(12f, -2.58f);
             createEnemy.SetActive(true);
@@ -55,23 +55,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void SelectCharacter()
+    void SelectCharacter() // 플레이어 생성
     {
         player = Instantiate(prefabList[SelectManager.s_Instance.character]);
         player.transform.position = new Vector3(-6.03f, -2.76f, 0);
         player.SetActive(true);
     }
 
-    public void ScoreUpdate(float score)
+    public void ScoreUpdate(float score) // 스코어 업데이트
     {
         this.score += (score * 100);
         OnScoreAction?.Invoke(this.score);
     }
 
-    public void Die()
+    public void Die() // 플레이어 사망
     {
         isGameOver = true;
-        RroutineStop();
+        RroutineStop(); // 리스폰 루틴 종료
         OnDieAction?.Invoke();
         print("다이");
     }
@@ -84,8 +84,9 @@ public class GameManager : MonoBehaviour
         OnScoreAction?.Invoke(this.score);
         OnRestart?.Invoke();
         PoolingManger.p_Instance.SetEnemy();
+        PoolingManger.p_Instance.SetFrog();
         PoolingManger.p_Instance.SetTrap();
-        RroutineStart();
+        RroutineStart(); // 리스폰 루틴 시작
 
         player.transform.position = new Vector3(-6.03f, -2.76f, 0);
         player.SetActive(true);

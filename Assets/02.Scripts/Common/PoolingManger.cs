@@ -10,7 +10,11 @@ public class PoolingManger : MonoBehaviour
 
     private GameObject EnemyPrefab;
     private List<GameObject> enemyPool;
-    private int maxEnemy = 10;
+    private int maxEnemy = 5;
+
+    private GameObject FrogPrefab;
+    private List<GameObject> frogPool;
+    private int maxFrog = 5;
 
     private GameObject TrapPrefab;
     private List<GameObject> trapPool;
@@ -23,14 +27,17 @@ public class PoolingManger : MonoBehaviour
         else if (p_Instance != this)
             Destroy(gameObject);
 
-
+        // Resources에서 할당
         EnemyPrefab = Resources.Load<GameObject>("Enemy");
         TrapPrefab = Resources.Load<GameObject>("Trap");
+        FrogPrefab = Resources.Load<GameObject>("Frog");
 
         StartCoroutine(CreateEnemy());
+        StartCoroutine(CreateFrog());
         StartCoroutine(CreateTrap());
     }
 
+    // Enemy 오브젝트 풀링
     IEnumerator CreateEnemy()
     {
         yield return new WaitForSeconds(0.03f);
@@ -55,7 +62,7 @@ public class PoolingManger : MonoBehaviour
 
         return null;
     }
-    public void SetEnemy()
+    public void SetEnemy() // 플레이어 사망시 적용할 메서드
     {
         foreach (var enemy in enemyPool)
         {
@@ -63,6 +70,40 @@ public class PoolingManger : MonoBehaviour
         }
     }
 
+    // Frog 오브젝트 풀링
+    IEnumerator CreateFrog()
+    {
+        yield return new WaitForSeconds(0.03f);
+        frogPool = new List<GameObject>(maxFrog);
+        GameObject eo = new GameObject("FrogObjects");
+        for (int i = 0; i < maxFrog; i++)
+        {
+            var frog = Instantiate(FrogPrefab, eo.transform);
+            frog.name = $"Enemy {i + 1}";
+            frog.SetActive(false);
+            frogPool.Add(frog);
+        }
+    }
+
+    public GameObject GetFrog()
+    {
+        foreach (var frog in frogPool)
+        {
+            if (!frog.activeSelf)
+                return frog;
+        }
+
+        return null;
+    }
+    public void SetFrog() // 플레이어 사망시 적용할 메서드
+    {
+        foreach (var frog in frogPool)
+        {
+            frog.SetActive(false);
+        }
+    }
+
+    // Trap 오브젝트 풀링
     IEnumerator CreateTrap()
     {
         yield return new WaitForSeconds(0.03f);
@@ -87,7 +128,7 @@ public class PoolingManger : MonoBehaviour
         return null;
     }
 
-    public void SetTrap()
+    public void SetTrap() // 플레이어 사망시 적용할 메서드
     {
         foreach (var trap in trapPool)
         {

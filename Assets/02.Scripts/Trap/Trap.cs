@@ -12,6 +12,7 @@ public class Trap : MonoBehaviour
 
     void Update()
     {
+        // 화면에서 사라졌을 때 비활성화
         if (transform.position.x < -11f && transform.gameObject.activeSelf)
         {
             transform.gameObject.SetActive(false);
@@ -20,15 +21,12 @@ public class Trap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        var target = col.GetComponent<LivingEntity>();
+        var target = col.GetComponent<PlayerDamage>();
         if (target != null)
         {
             target.OnDamage(10f);
-            var player = target.gameObject.GetComponent<PlayerDamage>();
-            if (player != null)
-            {
-                player.DamageEffect();
-            }
+            target.DamageEffect();
+
             transform.gameObject.SetActive(false);
         }
     }
