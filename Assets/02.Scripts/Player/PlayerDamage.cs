@@ -46,8 +46,13 @@ public class PlayerDamage : LivingEntity
             else
                 rb.AddForce(Vector2.left * 15f + Vector2.up * 10f, ForceMode2D.Impulse);
 
+            if (rb.velocity.x > 20f)
+                rb.velocity = new Vector2(20f, rb.velocity.y);
+            else if (rb.velocity.x < (-1 * 20f))
+                rb.velocity = new Vector2((-1 * 20f), rb.velocity.y);
+
             OnDamage(damage);
-            DamageEffect();
+            
         }
     }
     public void DamageEffect()
@@ -70,6 +75,7 @@ public class PlayerDamage : LivingEntity
         var data = GetComponent<PlayerCtrl>().playerData; // 캐릭터 데이터
         startHp = data.maxHp; // 시작 hp설정
         base.OnEnable();
+        spriteRenderer.color = Color.white;
         slider.gameObject.SetActive(true);
         slider.maxValue = startHp;
         slider.value = Health;
@@ -80,6 +86,8 @@ public class PlayerDamage : LivingEntity
     {
         base.OnDamage(damage);
         slider.value = Health;
+
+        DamageEffect();
     }
 
     public override void Die() // 사망했을 때

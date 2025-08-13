@@ -11,10 +11,7 @@ public class PlayerCtrl : MonoBehaviour
     private PlayerInputHandler input;
     private Rigidbody2D rb;
     private Animator animator;
-    [SerializeField] private Transform hand; // overlay
-    [SerializeField] private Transform weapone; // 무기
-    [SerializeField] private Transform effect; // Gun 캐릭 공격 이펙트
-    private Transform shadow;
+    [SerializeField] private List<Transform> player; // 그림자, 무기, 손(overlay), 이펙트(Gun), 블렛
     public PlayerData playerData;
     private float jumpPower = 120f;
     private float moveSpeed = 5f;
@@ -27,19 +24,21 @@ public class PlayerCtrl : MonoBehaviour
     private float attackTime;
     private bool isEffect = false;
     private float shadowHeight;
+
+    private AudioSource audioSource;
+    public AudioClip jumpSound;
+    public AudioClip attackSound;
     void Awake()
     {
         input = GetComponent<PlayerInputHandler>();
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        hand = transform.GetChild(2).transform;
-        weapone = transform.GetChild(1).transform;
-        shadow = transform.GetChild(0).transform;
-        if (transform.childCount > 3) // Gun 캐릭터 사용시
+        audioSource = GetComponent<AudioSource>();
+        for (int i = 0; i < transform.childCount; i++)
         {
-            effect = transform.GetChild(3).transform; 
-            if (effect != null) isEffect = true;
+            player.Add(transform.GetChild(i));
+            if (i == 3) isEffect = true;
         }
         shadowHeight = transform.position.y; // 그림자 초기 위치 설정
         rb.gravityScale = -Physics2D.gravity.y; // Physics2D.gravity.y는 -9.81
@@ -82,11 +81,11 @@ public class PlayerCtrl : MonoBehaviour
     private void LateUpdate()
     {
         // 그림자 위치 조정
-        shadow.position = new Vector2(transform.position.x, shadowHeight);
+        player[0].position = new Vector2(transform.position.x, shadowHeight);
         
         // 점프 높이에 따라 그림자 크기 조정
         float shadowScale = Mathf.Clamp(1 + transform.position.y - shadowHeight, 1f, 3f);
-        shadow.localScale = new Vector2(shadowScale, 1f);
+        player[0].localScale = new Vector2(shadowScale, 1f);
     }
     
 
@@ -114,7 +113,7 @@ public class PlayerCtrl : MonoBehaviour
         if (input.IsJumping && isJump < 2) // 점프, 2단 점프
         {
             isJump++;
-            
+            audioSource.PlayOneShot(jumpSound, 0.5f);
             animator.SetBool(hashJump, true);
             jumpPower = CalulateInitialVelocity(Height);
             rb.velocity = Vector2.zero;
@@ -131,11 +130,12 @@ public class PlayerCtrl : MonoBehaviour
         if (input.IsAttacking && attackTime > playerData.attackSpeed)
         {
             attackTime = 0f;
+            audioSource.PlayOneShot(attackSound, 0.5f);
             if (transform.childCount > 3) // Gun 캐릭 총알 발사
             {
-                var bullet = transform.GetChild(4).transform;
+                var bullet = player[4].transform;
                 bullet.GetComponent<BulletCtrl>().damage = playerData.damage;
-                bullet.position = transform.GetChild(1).GetChild(0).position;
+                bullet.position = player[1].GetChild(0).position;
                 bullet.gameObject.SetActive(true);
             }
             StartCoroutine(AttackLenght());
@@ -168,8 +168,8 @@ public class PlayerCtrl : MonoBehaviour
 
     private void AttackMotion(bool isEnable)
     {
-        hand.gameObject.SetActive(isEnable);
-        weapone.gameObject.SetActive(isEnable);
-        if (isEffect) effect.gameObject.SetActive(isEnable);
+        player[1].gameObject.SetActive(isEnable);
+        player[2].gameObject.SetActive(isEnable);
+        if (isEffect) player[3].gameObject.SetActive(isEnable);
     }
 }

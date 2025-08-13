@@ -24,8 +24,9 @@ public class Trap : MonoBehaviour
         var target = col.GetComponent<PlayerDamage>();
         if (target != null)
         {
+            // 트랩에 닿았을 때는 넉백을 하지 않는다.
             target.OnDamage(10f);
-            target.DamageEffect();
+            //target.DamageEffect();
 
             transform.gameObject.SetActive(false);
         }

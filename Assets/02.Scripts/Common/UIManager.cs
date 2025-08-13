@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
 
     private void ScoreUpdate(float score)
     {
+        // 숫자 표기 설정 (1,000,000)
         scoreTxt.text = ((int)score).ToString("N0", new CultureInfo("ko-KR"));
     }
 
@@ -40,6 +41,11 @@ public class UIManager : MonoBehaviour
     {
         GameManager.Instance.ReStart();
         gameOverCanvas.gameObject.SetActive(false);
+    }
+    
+    public void OpenOption()
+    {
+
     }
 
 }

@@ -12,7 +12,8 @@ public class EnemyJump : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public float Height => spriteRenderer.bounds.size.y;
     private float jumpPower;
-    private float jumpTime;
+    private float curJumpTime;
+    [SerializeField] private float jumpTime = 1.5f;
     private bool isJump = false;
     void Start()
     {
@@ -23,11 +24,16 @@ public class EnemyJump : MonoBehaviour
     }
     private void Update()
     {
-        jumpTime += Time.deltaTime;
+        curJumpTime += Time.deltaTime;
+    }
+    private void OnEnable()
+    {
+        jumpTime = Random.Range(1f, 2f);
     }
     private void FixedUpdate()
     {
-        if (!isJump && jumpTime > 2f)
+        // 지면에 있을 때 1~2초 사이에 한번 점프
+        if (!isJump && curJumpTime > jumpTime)
         {
             Jump();
         }
@@ -37,7 +43,6 @@ public class EnemyJump : MonoBehaviour
     {
         if (GameManager.Instance.isGameOver) return;
         isJump = true;
-        jumpTime = 0f;
         animator.SetTrigger(hashJump);
         jumpPower = CalulateInitialVelocity(Height);
         rb.velocity = Vector2.zero;
@@ -52,8 +57,10 @@ public class EnemyJump : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D col)
     {
+        // 지면에 닿았을 때 조건 초기화
         if (col.gameObject.CompareTag(groundTag))
         {
+            curJumpTime = 0f;
             isJump = false;
         }
     }
