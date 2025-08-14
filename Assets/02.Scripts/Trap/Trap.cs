@@ -5,9 +5,12 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
+    public TrapData trapData;
+    private float damage;
     void Start()
     {
-        
+        GetComponent<ObjectMove>().moveSpeed = trapData.moveSpeed;
+        damage = trapData.damage;
     }
 
     void Update()
@@ -25,7 +28,7 @@ public class Trap : MonoBehaviour
         if (target != null)
         {
             // 트랩에 닿았을 때는 넉백을 하지 않는다.
-            target.OnDamage(10f);
+            target.OnDamage(damage);
             //target.DamageEffect();
 
             transform.gameObject.SetActive(false);

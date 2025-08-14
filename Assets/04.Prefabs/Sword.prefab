@@ -339,9 +339,9 @@ GameObject:
   - component: {fileID: 4496961101052980152}
   - component: {fileID: 7729266000518150935}
   - component: {fileID: 1971809270846585164}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -513,7 +513,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: []
   playerData: {fileID: 11400000, guid: 9f8a3288bb2ac4d4293a7a3f8599ee3f, type: 2}
-  isJump: 0
   jumpSound: {fileID: 8300000, guid: 2b2eb5c21b8fce34da6953709b487cb0, type: 3}
   attackSound: {fileID: 8300000, guid: daedb742a2bacab4bbd1128bba396ab5, type: 3}
 --- !u!114 &2410706743438145160
@@ -644,7 +643,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -10,7 +10,7 @@ public class EnemyJump : MonoBehaviour
     private Animator animator;
     private Rigidbody2D rb;
     private SpriteRenderer spriteRenderer;
-    public float Height => spriteRenderer.bounds.size.y;
+    private float Height => spriteRenderer.bounds.size.y;
     private float jumpPower;
     private float curJumpTime;
     [SerializeField] private float jumpTime = 1.5f;

@@ -19,9 +19,9 @@ GameObject:
   - component: {fileID: 3848320410735009392}
   - component: {fileID: 3685043366599077285}
   - component: {fileID: 1771999598282472885}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Scythe
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,7 +193,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: []
   playerData: {fileID: 11400000, guid: 1d1e25182276a444f9398b9378af0361, type: 2}
-  isJump: 0
   jumpSound: {fileID: 8300000, guid: 2b2eb5c21b8fce34da6953709b487cb0, type: 3}
   attackSound: {fileID: 8300000, guid: 9be121ce189b4c94991718f9826d7d3c, type: 3}
 --- !u!114 &1679915030496864290
@@ -324,7 +323,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

@@ -455,9 +455,9 @@ GameObject:
   - component: {fileID: 3792723379153716550}
   - component: {fileID: 4842250243809798838}
   - component: {fileID: 2819876240095473549}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -631,7 +631,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: []
   playerData: {fileID: 11400000, guid: 9f8a3288bb2ac4d4293a7a3f8599ee3f, type: 2}
-  isJump: 0
   jumpSound: {fileID: 8300000, guid: 2b2eb5c21b8fce34da6953709b487cb0, type: 3}
   attackSound: {fileID: 8300000, guid: 31fc1840300354c458d7c82cddb7e05d, type: 3}
 --- !u!114 &2005266602794076132
@@ -762,7 +761,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

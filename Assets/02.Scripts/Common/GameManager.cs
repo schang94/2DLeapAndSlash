@@ -79,6 +79,7 @@ public class GameManager : MonoBehaviour
     public void ReStart()
     {
         isGameOver = false;
+        isHit = false;
         player.SetActive(false);
         score = 0;
         OnScoreAction?.Invoke(this.score);

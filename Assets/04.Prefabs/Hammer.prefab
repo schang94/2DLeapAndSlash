@@ -19,9 +19,9 @@ GameObject:
   - component: {fileID: 6319748547231928696}
   - component: {fileID: 4819060672497786097}
   - component: {fileID: 5188157869970403960}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hammer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -193,7 +193,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: []
   playerData: {fileID: 11400000, guid: 6337ff30e9b94de408378c71f58ce83a, type: 2}
-  isJump: 0
   jumpSound: {fileID: 8300000, guid: 2b2eb5c21b8fce34da6953709b487cb0, type: 3}
   attackSound: {fileID: 8300000, guid: 57351a99c4c516247b383629ccd38054, type: 3}
 --- !u!114 &4555389391947863745
@@ -324,7 +323,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0

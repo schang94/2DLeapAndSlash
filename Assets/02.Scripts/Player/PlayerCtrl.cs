@@ -16,10 +16,10 @@ public class PlayerCtrl : MonoBehaviour
     private float jumpPower = 120f;
     private float moveSpeed = 5f;
     private float maxSpeed = 5f;
-    public int isJump = 0;
+    private int isJump = 0;
 
     private SpriteRenderer spriteRenderer;
-    public float Height => spriteRenderer.bounds.size.y;
+    private float Height => spriteRenderer.bounds.size.y;
 
     private float attackTime;
     private bool isEffect = false;
@@ -72,7 +72,7 @@ public class PlayerCtrl : MonoBehaviour
         attackTime += Time.deltaTime; // 공격 시간 증가
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (GameManager.Instance.isGameOver) return;
         Move();

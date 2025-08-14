@@ -17,7 +17,7 @@ public class BGRelocation : MonoBehaviour
 
     void Relocation()
     {
-        if (transform.position.x < -w * 1.98f)
+        if (transform.position.x < -w * 1.975f)
         {
             Vector2 offset = new Vector2(w * 2.99f, 0);
             transform.position = (Vector2)transform.position + offset;

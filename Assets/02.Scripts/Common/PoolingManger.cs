@@ -28,8 +28,8 @@ public class PoolingManger : MonoBehaviour
             Destroy(gameObject);
 
         // Resources에서 할당
-        EnemyPrefab = Resources.Load<GameObject>("Enemy");
-        TrapPrefab = Resources.Load<GameObject>("Trap");
+        EnemyPrefab = Resources.Load<GameObject>("Mask");
+        TrapPrefab = Resources.Load<GameObject>("Saw");
         FrogPrefab = Resources.Load<GameObject>("Frog");
 
         StartCoroutine(CreateEnemy());

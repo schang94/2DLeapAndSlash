@@ -9,15 +9,19 @@ public class EnemyDamage : LivingEntity
     private readonly int hashDie = Animator.StringToHash("Die");
     private Animator animator;
     public bool isDie = false;
+    public EnemyData enemyData;
+    private float enemyDamage;
     void Start()
     {
         animator = GetComponent<Animator>();
+        
     }
 
 
     protected override void OnEnable()
     {
-        startHp = 100;
+        enemyDamage = enemyData.damage;
+        startHp = enemyData.maxHp;
         base.OnEnable();
         DieSetting(false);
 
@@ -42,7 +46,7 @@ public class EnemyDamage : LivingEntity
         PlayerDamage target = col.transform.GetComponent<PlayerDamage>();
         if (target != null && !isDie)
         {
-            target.KnockBack(GetComponent<EnemyDamage>(), 10f);
+            target.KnockBack(GetComponent<EnemyDamage>(), enemyDamage);
             //target.OnDamage(10f);
         }
     }

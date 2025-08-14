@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1511888733344849114}
   - component: {fileID: 1415886462988144340}
   - component: {fileID: 5400604950963896734}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Frog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a33afc0753cc540b36f08b9fe86415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isDie: 0
+  enemyData: {fileID: 11400000, guid: 73c8f54112d52b04eb1b0c6252f3fa04, type: 2}
 --- !u!114 &1415886462988144340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,6 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startHp: 100
   isDie: 0
+  enemyData: {fileID: 11400000, guid: 73c8f54112d52b04eb1b0c6252f3fa04, type: 2}
 --- !u!114 &5400604950963896734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,3 +213,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a966da7f909d240811a0f0164fb792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpTime: 1.5

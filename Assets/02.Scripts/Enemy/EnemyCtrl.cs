@@ -8,13 +8,13 @@ public class EnemyCtrl : MonoBehaviour
     private readonly int hashEnd = Animator.StringToHash("End");
     Animator animator;
     Rigidbody2D rb;
-    float moveSpeed;
-    public bool isDie = false;
+    private float moveSpeed;
+    public EnemyData enemyData;
     void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        moveSpeed = Random.Range(3f, 5f);
+        moveSpeed = enemyData.moveSpeed;
         
     }
 
