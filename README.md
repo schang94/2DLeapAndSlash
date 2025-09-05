@@ -1,2 +1,2 @@
-# Rocket2D
+# 2D Leap & Slash
 2dGame
